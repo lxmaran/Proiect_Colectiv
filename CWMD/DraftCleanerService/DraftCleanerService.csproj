@@ -151,10 +151,6 @@
       <Project>{6267cfbd-b97b-4f2f-8429-db6e8a4125e5}</Project>
       <Name>Mapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{9ad8494d-156c-44c3-8dd3-17a212cef3fb}</Project>
-      <Name>Services</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
