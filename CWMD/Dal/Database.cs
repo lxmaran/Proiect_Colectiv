@@ -34,7 +34,13 @@ namespace Dal
 
     public interface IMyDbContext : System.IDisposable
     {
-        System.Data.Entity.DbSet<Person> People { get; set; } // Person
+        System.Data.Entity.DbSet<Document> Documents { get; set; } // Documents
+        System.Data.Entity.DbSet<DocumentStatu> DocumentStatus { get; set; } // DocumentStatus
+        System.Data.Entity.DbSet<Person> People { get; set; } // Persons
+        System.Data.Entity.DbSet<Role> Roles { get; set; } // Roles
+        System.Data.Entity.DbSet<Status> Status { get; set; } // Statuses
+        System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; } // sysdiagrams
+        System.Data.Entity.DbSet<User> Users { get; set; } // Users
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -48,7 +54,13 @@ namespace Dal
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
     public class MyDbContext : System.Data.Entity.DbContext, IMyDbContext
     {
-        public System.Data.Entity.DbSet<Person> People { get; set; } // Person
+        public System.Data.Entity.DbSet<Document> Documents { get; set; } // Documents
+        public System.Data.Entity.DbSet<DocumentStatu> DocumentStatus { get; set; } // DocumentStatus
+        public System.Data.Entity.DbSet<Person> People { get; set; } // Persons
+        public System.Data.Entity.DbSet<Role> Roles { get; set; } // Roles
+        public System.Data.Entity.DbSet<Status> Status { get; set; } // Statuses
+        public System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; } // sysdiagrams
+        public System.Data.Entity.DbSet<User> Users { get; set; } // Users
 
         static MyDbContext()
         {
@@ -98,12 +110,24 @@ namespace Dal
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Configurations.Add(new DocumentConfiguration());
+            modelBuilder.Configurations.Add(new DocumentStatuConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
+            modelBuilder.Configurations.Add(new RoleConfiguration());
+            modelBuilder.Configurations.Add(new StatusConfiguration());
+            modelBuilder.Configurations.Add(new SysdiagramConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
+            modelBuilder.Configurations.Add(new DocumentConfiguration(schema));
+            modelBuilder.Configurations.Add(new DocumentStatuConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonConfiguration(schema));
+            modelBuilder.Configurations.Add(new RoleConfiguration(schema));
+            modelBuilder.Configurations.Add(new StatusConfiguration(schema));
+            modelBuilder.Configurations.Add(new SysdiagramConfiguration(schema));
+            modelBuilder.Configurations.Add(new UserConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -114,11 +138,23 @@ namespace Dal
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
     public class FakeMyDbContext : IMyDbContext
     {
+        public System.Data.Entity.DbSet<Document> Documents { get; set; }
+        public System.Data.Entity.DbSet<DocumentStatu> DocumentStatus { get; set; }
         public System.Data.Entity.DbSet<Person> People { get; set; }
+        public System.Data.Entity.DbSet<Role> Roles { get; set; }
+        public System.Data.Entity.DbSet<Status> Status { get; set; }
+        public System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; }
+        public System.Data.Entity.DbSet<User> Users { get; set; }
 
         public FakeMyDbContext()
         {
+            Documents = new FakeDbSet<Document>("Id");
+            DocumentStatus = new FakeDbSet<DocumentStatu>("DocumentId", "StatusId");
             People = new FakeDbSet<Person>("Id");
+            Roles = new FakeDbSet<Role>("Id");
+            Status = new FakeDbSet<Status>("Id");
+            Sysdiagrams = new FakeDbSet<Sysdiagram>("DiagramId");
+            Users = new FakeDbSet<User>("Id");
         }
 
         public int SaveChangesCount { get; private set; }
@@ -406,19 +442,185 @@ namespace Dal
 
     #region POCO classes
 
-    // Person
+    // Documents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class Document
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Guid { get; set; } // GUID (length: 32)
+        public System.DateTime CreateDate { get; set; } // CreateDate
+        public System.DateTime UpdateDate { get; set; } // UpdateDate
+        public string PersonId { get; set; } // PersonId (length: 32)
+        public string Type { get; set; } // Type (length: 50)
+        public string Name { get; set; } // Name (length: 50)
+
+        // Reverse navigation
+        public virtual System.Collections.Generic.ICollection<DocumentStatu> DocumentStatus { get; set; } // Many to many mapping
+        public virtual System.Collections.Generic.ICollection<Person> People { get; set; } // Many to many mapping
+
+        // Foreign keys
+
+        public Document()
+        {
+            DocumentStatus = new System.Collections.Generic.List<DocumentStatu>();
+            People = new System.Collections.Generic.List<Person>();
+        }
+    }
+
+    // DocumentStatus
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class DocumentStatu
+    {
+        public System.DateTime? CreationDate { get; set; } // CreationDate
+        public int DocumentId { get; set; } // DocumentId (Primary key)
+        public int StatusId { get; set; } // StatusId (Primary key)
+        public System.DateTime? UpdateDate { get; set; } // UpdateDate
+
+        // Foreign keys
+        public virtual Document Document { get; set; } // FK__DocumentS__Docum__45F365D3
+        public virtual Status Status { get; set; } // FK__DocumentS__Statu__46E78A0C
+    }
+
+    // Persons
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
     public class Person
     {
         public int Id { get; set; } // Id (Primary key)
+        public string Guid { get; set; } // GUID (length: 32)
+        public int? RoleId { get; set; } // RoleId
+        public string FirstName { get; set; } // FirstName (length: 50)
+        public string LastName { get; set; } // LastName (length: 50)
+
+        // Reverse navigation
+        public virtual System.Collections.Generic.ICollection<Document> Documents { get; set; } // Many to many mapping
+
+        // Foreign keys
+        public virtual Role Role { get; set; } // FK__Persons__RoleId__2A4B4B5E
+        public virtual User User { get; set; } // FK__Persons__Id__29572725
+
+        public Person()
+        {
+            Documents = new System.Collections.Generic.List<Document>();
+        }
+    }
+
+    // Roles
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class Role
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Role_ { get; set; } // Role (length: 50)
+
+        // Reverse navigation
+        public virtual System.Collections.Generic.ICollection<Person> People { get; set; } // Persons.FK__Persons__RoleId__2A4B4B5E
+
+        public Role()
+        {
+            People = new System.Collections.Generic.List<Person>();
+        }
+    }
+
+    // Statuses
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class Status
+    {
+        public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 100)
+
+        // Reverse navigation
+        public virtual System.Collections.Generic.ICollection<DocumentStatu> DocumentStatus { get; set; } // Many to many mapping
+
+        public Status()
+        {
+            DocumentStatus = new System.Collections.Generic.List<DocumentStatu>();
+        }
+    }
+
+    // sysdiagrams
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class Sysdiagram
+    {
+        public string Name { get; set; } // name (length: 128)
+        public int PrincipalId { get; set; } // principal_id
+        public int DiagramId { get; set; } // diagram_id (Primary key)
+        public int? Version { get; set; } // version
+        public byte[] Definition { get; set; } // definition
+    }
+
+    // Users
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class User
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string UserName { get; set; } // UserName (length: 120)
+        public string Password { get; set; } // Password
+
+        // Reverse navigation
+        public virtual Person Person { get; set; } // Persons.FK__Persons__Id__29572725
     }
 
     #endregion
 
     #region POCO Configuration
 
-    // Person
+    // Documents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class DocumentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Document>
+    {
+        public DocumentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocumentConfiguration(string schema)
+        {
+            ToTable("Documents", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Guid).HasColumnName(@"GUID").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(32);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsRequired().HasColumnType("date");
+            Property(x => x.UpdateDate).HasColumnName(@"UpdateDate").IsRequired().HasColumnType("date");
+            Property(x => x.PersonId).HasColumnName(@"PersonId").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(32);
+            Property(x => x.Type).HasColumnName(@"Type").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+            Property(x => x.Name).HasColumnName(@"Name").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+
+            // Foreign keys
+            HasMany(t => t.People).WithMany(t => t.Documents).Map(m =>
+            {
+                m.ToTable("Flows", "dbo");
+                m.MapLeftKey("DocumentId");
+                m.MapRightKey("PersonId");
+            });
+        }
+    }
+
+    // DocumentStatus
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class DocumentStatuConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DocumentStatu>
+    {
+        public DocumentStatuConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocumentStatuConfiguration(string schema)
+        {
+            ToTable("DocumentStatus", schema);
+            HasKey(x => new { x.DocumentId, x.StatusId });
+
+            Property(x => x.CreationDate).HasColumnName(@"CreationDate").IsOptional().HasColumnType("date");
+            Property(x => x.DocumentId).HasColumnName(@"DocumentId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StatusId).HasColumnName(@"StatusId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UpdateDate).HasColumnName(@"UpdateDate").IsOptional().HasColumnType("date");
+
+            // Foreign keys
+            HasRequired(a => a.Document).WithMany(b => b.DocumentStatus).HasForeignKey(c => c.DocumentId).WillCascadeOnDelete(false); // FK__DocumentS__Docum__45F365D3
+            HasRequired(a => a.Status).WithMany(b => b.DocumentStatus).HasForeignKey(c => c.StatusId).WillCascadeOnDelete(false); // FK__DocumentS__Statu__46E78A0C
+        }
+    }
+
+    // Persons
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
     public class PersonConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Person>
     {
@@ -429,11 +631,98 @@ namespace Dal
 
         public PersonConfiguration(string schema)
         {
-            ToTable("Person", schema);
+            ToTable("Persons", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Guid).HasColumnName(@"GUID").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(32);
+            Property(x => x.RoleId).HasColumnName(@"RoleId").IsOptional().HasColumnType("int");
+            Property(x => x.FirstName).HasColumnName(@"FirstName").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+            Property(x => x.LastName).HasColumnName(@"LastName").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+
+            // Foreign keys
+            HasOptional(a => a.Role).WithMany(b => b.People).HasForeignKey(c => c.RoleId).WillCascadeOnDelete(false); // FK__Persons__RoleId__2A4B4B5E
+            HasRequired(a => a.User).WithOptional(b => b.Person).WillCascadeOnDelete(false); // FK__Persons__Id__29572725
+        }
+    }
+
+    // Roles
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class RoleConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Role>
+    {
+        public RoleConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RoleConfiguration(string schema)
+        {
+            ToTable("Roles", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Role_).HasColumnName(@"Role").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+        }
+    }
+
+    // Statuses
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class StatusConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Status>
+    {
+        public StatusConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StatusConfiguration(string schema)
+        {
+            ToTable("Statuses", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(100);
+        }
+    }
+
+    // sysdiagrams
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class SysdiagramConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Sysdiagram>
+    {
+        public SysdiagramConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SysdiagramConfiguration(string schema)
+        {
+            ToTable("sysdiagrams", schema);
+            HasKey(x => x.DiagramId);
+
+            Property(x => x.Name).HasColumnName(@"name").IsRequired().HasColumnType("nvarchar").HasMaxLength(128);
+            Property(x => x.PrincipalId).HasColumnName(@"principal_id").IsRequired().HasColumnType("int");
+            Property(x => x.DiagramId).HasColumnName(@"diagram_id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Version).HasColumnName(@"version").IsOptional().HasColumnType("int");
+            Property(x => x.Definition).HasColumnName(@"definition").IsOptional().HasColumnType("varbinary");
+        }
+    }
+
+    // Users
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class UserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<User>
+    {
+        public UserConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public UserConfiguration(string schema)
+        {
+            ToTable("Users", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserName).HasColumnName(@"UserName").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(120);
+            Property(x => x.Password).HasColumnName(@"Password").IsRequired().IsUnicode(false).HasColumnType("varchar(max)");
         }
     }
 

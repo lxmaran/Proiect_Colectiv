@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="DraftCleanerService.Service1" Factory="DraftCleanerService.WcfServiceFactory" CodeBehind="Service1.svc.cs" %>
