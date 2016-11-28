@@ -1,4 +1,5 @@
-﻿using Contracts.IServices;
+﻿using Contracts.AuthenticationHelpers;
+using Contracts.IServices;
 using Dal;
 using Microsoft.Practices.Unity;
 using Services.Services;
@@ -11,8 +12,10 @@ namespace Services
         {
             //regiseter your services like:
             //container.RegisterType<IServiceInterface, ServiceImpl>();
-            container.RegisterType<IMyDbContext, MyDbContext>();
+            //container.RegisterType<IMyDbContext, MyDbContext>();
             container.RegisterType<IPersonService, PersonService>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IAuthenticationHelper, AuthenticationHelper>();
         }
     }
 }

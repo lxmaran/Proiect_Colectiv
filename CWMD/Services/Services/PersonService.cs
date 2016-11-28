@@ -8,15 +8,20 @@ namespace Services.Services
 {
     public class PersonService : IPersonService
     {
-        public IMyDbContext context { get; set; }
+        //public IMyDbContext context { get; set; }
         public PersonService()
         {
-            context = new MyDbContext();
+            //context = new MyDbContext();
         }
 
         public IEnumerable<PersonDto> GetAll()
         {
-            return context.People.Select(x => new PersonDto() { Id = x.Id, Name = x.Name }).ToList();
+            using (var context = new MyDbContext())
+            {
+                return context.People
+                    .Select(x => new PersonDto() { Id = x.Id, Name = x.FirstName })
+                    .ToList();
+            }
         }
     }
 }
