@@ -12,6 +12,7 @@ namespace Services
         {
             //regiseter your services like:
             //container.RegisterType<IServiceInterface, ServiceImpl>();
+            container.RegisterType<IMyDbContext, MyDbContext>();
             //container.RegisterType<IMyDbContext, MyDbContext>();
             container.RegisterType<IPersonService, PersonService>();
             container.RegisterType<IUserService, UserService>();

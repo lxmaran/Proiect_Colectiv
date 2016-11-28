@@ -1,3 +1,4 @@
+using Contracts.IServices;
 using Microsoft.Practices.Unity;
 using Unity.Wcf;
 
@@ -9,6 +10,8 @@ namespace DraftCleanerService
         {
 			
             //container.RegisteType<IYourService, YourServiceImpl>();
+            container.RegisterType<IDraftCleanerServiceWcf, DraftCleanerServiceWcf>();
+            container.RegisterType<IDraftCleanerService, Services.Services.DraftCleanerService>();
         }
     }    
 }
