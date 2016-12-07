@@ -1,0 +1,26 @@
+﻿<template>
+
+
+    
+<!--    <nav class="navbar navbar-inverse">-->
+<!--        <div class="container-fluid">-->
+<!--            <ul class="nav navbar-nav">-->
+<!--$1$                 class="${row.isActive ? 'active' : ''}" will check if we are on a specific link from the router and it will set the class in the navbar to active #1#-->
+<!--                <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">-->
+<!--                    <a href.bind="row.href">${row.title}</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </nav>-->
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+
+            <!-- We can call the logout() method directly on the object. -->
+            <li><a href="#" click.delegate="auth.logout()">Log Out</a></li>
+        </ul>
+    </div>
+<!---->
+<!--    <router-view></router-view>-->
+
+</template>
