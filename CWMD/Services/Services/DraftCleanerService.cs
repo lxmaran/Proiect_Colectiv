@@ -23,9 +23,15 @@ namespace Services.Services
                     .Where(x => x.Status.Id == draftStatusId &&
                                 x.UpdateDate == null).ToList()
                     .Where(x=> x.CreationDate.Value <= DateTime.Now.AddDays(-days))
-                    .ForEach(x=>
-                            context.DocumentStatus.Remove(x)
-                            );
+                    .ForEach(x =>
+                    {
+                        context.DocumentStatus.Add(new DocumentStatu()
+                        {
+                            Document = x.Document,
+                            Status = context.Status.FirstOrDefault(y => y.Name == "Deleted")
+                        });
+                        x.UpdateDate = DateTime.Now;
+                    });
                 context.SaveChanges();
             }
         }
