@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link href="spa/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="spa/src/components/dashboard/side-menu.css" rel="stylesheet"/>
+</head>
+<body ng-app="app">
+<div ui-view></div>
+
+<script src="spa/node_modules/angular/angular.min.js"></script>
+<script src="spa/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="spa/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="spa/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="spa/src/app.js"></script>
+<script src="spa/src/RouteManager.js"></script>
+<!-- services-->
+<script src="spa/src/services/LoginService.js"></script>
+<!-- end services-->
+<script src="spa/src/components/login/login.js"></script>
+<script src="spa/src/components/dashboard/dashboard.js"></script>
+<script src="spa/src/components/side-menu/side-menu.js"></script>
+<script src="spa/src/components/work-zone/work-zone.js"></script>
+<script src="spa/src/components/initial-tasks/initial-tasks.js"></script>
+<script src="spa/src/components/tasks-zone/tasks-zone.js"></script>
+<script src="spa/src/components/finished-tasks/finished-tasks.js"></script>
+
+</body>
+</html>

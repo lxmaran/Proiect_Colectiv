@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftCleanerRunner", "Draft
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{58422522-4DA6-4092-B690-BE08B8046772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpa", "WebSpa\WebSpa.csproj", "{4EA0C95D-152A-4C74-AB5E-E407ABD77684}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{58422522-4DA6-4092-B690-BE08B8046772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58422522-4DA6-4092-B690-BE08B8046772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58422522-4DA6-4092-B690-BE08B8046772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
