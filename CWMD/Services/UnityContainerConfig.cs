@@ -11,10 +11,8 @@ namespace Services
         public static void Configure(IUnityContainer container)
         {
             //regiseter your services like:
-            //container.RegisterType<IServiceInterface, ServiceImpl>();
             container.RegisterType<IMyDbContext, MyDbContext>();
-            //container.RegisterType<IMyDbContext, MyDbContext>();
-            container.RegisterType<IPersonService, PersonService>();
+            //container.RegisterType<IPersonService, PersonService>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IAuthenticationHelper, AuthenticationHelper>();
         }
