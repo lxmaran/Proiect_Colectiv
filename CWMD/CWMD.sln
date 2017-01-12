@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.25928.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "Dal\Dal.csproj", "{9F360E1F-CC7C-42F8-A75F-576C8F4E7468}"
 EndProject
@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftCleanerRunner", "Draft
 	ProjectSection(ProjectDependencies) = postProject
 		{6BD5B09F-DFCF-4813-A5F5-D8651B38B743} = {6BD5B09F-DFCF-4813-A5F5-D8651B38B743}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{58422522-4DA6-4092-B690-BE08B8046772}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpa", "WebSpa\WebSpa.csproj", "{4EA0C95D-152A-4C74-AB5E-E407ABD77684}"
 EndProject
@@ -58,10 +56,6 @@ Global
 		{91F9058B-92FF-4772-8E72-5DF9D208EBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91F9058B-92FF-4772-8E72-5DF9D208EBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91F9058B-92FF-4772-8E72-5DF9D208EBC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58422522-4DA6-4092-B690-BE08B8046772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58422522-4DA6-4092-B690-BE08B8046772}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58422522-4DA6-4092-B690-BE08B8046772}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58422522-4DA6-4092-B690-BE08B8046772}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Release|Any CPU.ActiveCfg = Release|Any CPU

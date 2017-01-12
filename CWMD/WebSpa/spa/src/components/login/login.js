@@ -17,6 +17,6 @@ app
                     }
                     console.log(response.status);
                 });
-            $ctrl.goToHome = () => $state.go('/dashboard');
+            $ctrl.goToHome = () => $state.go('dashboard');
         }
     });
