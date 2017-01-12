@@ -18,25 +18,23 @@ namespace WebApi.Controllers
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        private readonly Lazy<IUserService> userServiceLazy;
-        private readonly Lazy<IAuthenticationHelper> authenticationHelperLazy;
-        private IUserService UserService { get { return userServiceLazy.Value; } }
-        private IAuthenticationHelper AuthenticationHelper { get { return authenticationHelperLazy.Value; } }
+        private IUserService userService { get; }
+        private IAuthenticationHelper authenticationHelper { get; }
 
-        public UserController(Lazy<IUserService> userServiceLazy, Lazy<IAuthenticationHelper> authenticationHelperLazy)
+        public UserController(IUserService userService, IAuthenticationHelper authenticationHelper)
         {
-            this.userServiceLazy = userServiceLazy;
-            this.authenticationHelperLazy = authenticationHelperLazy;
+            this.userService = userService;
+            this.authenticationHelper = authenticationHelper;
         }
 
         [HttpPost]
         [EnableCors("*", "*", "*", "*")]
         [Route("signin")]
-        public async Task<string> SignIn([FromBody] UserDto user)
+        public IHttpActionResult SignIn([FromBody] UserDto user)
         {
             var apiBaseUrl = ConfigurationManager.AppSettings[StringConstants.ApiBaseUrl];
-            var token = await AuthenticationHelper.GetAuthorizationToken(apiBaseUrl, user.UserName, user.Password);
-            return token;
+            var token = authenticationHelper.GetAuthorizationToken(apiBaseUrl, user.UserName, user.Password);
+            return Ok(token);
         }
 
     }
