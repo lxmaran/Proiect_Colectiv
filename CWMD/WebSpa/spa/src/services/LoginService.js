@@ -3,8 +3,8 @@
 
         const service = this;
 
-        service.login = (user,password) =>
+        service.login = (user, password) =>
             $http
-                .get('http://localhost:50776/' + `api/login/${user+';'+password}`)
-                .then(response => response.data);
+            .post('http://localhost:50776/' + `api/auth`, { username: user, password: password })
+            .then(response => response, errno => errno);
     });

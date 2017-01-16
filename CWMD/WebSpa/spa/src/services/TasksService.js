@@ -8,7 +8,7 @@
                 .get('http://localhost:50776/' + `api/tasks`)
                 .then(response => response.data);
 
-        service.updateTask = task => 
-            $http.put('http://localhost:50776/' + `api/tasks/${task.taskId}`, task)
+        service.updateTask = task =>
+            $http.put('http://localhost:50776/' + `api/tasks/${task.taskId}`, task);
 
     });
