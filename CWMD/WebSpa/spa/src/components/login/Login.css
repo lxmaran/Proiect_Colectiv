@@ -1,0 +1,63 @@
+﻿body {
+}
+
+.login-h1 {
+    margin: 0;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    background: url("http://www.twitrcovers.com/wp-content/uploads/2014/10/Blue-Triangles-l.jpg");
+    background-size: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding-top: 15px;
+}
+
+.application-title {
+    margin-left: 20px;
+    font-size: 50px;
+    font-weight: bold;
+     font-family: 'Open Sans', sans-serif;
+}
+.login-email-field {
+    margin-top: 40px;
+    text-align: right;
+    margin-right: 145px;
+}
+
+.login-password-field {
+    margin-top: 20px;
+    text-align: right;
+    margin-right: 145px;
+    margin-bottom: 20px;
+}
+
+.login-checkbox-field {
+    text-align: right;
+    margin-right: 145px;
+}
+
+.login-button {
+    width: 100px;
+    background-color: #3ED6E4;
+}
+
+.login-button:hover {
+    background-color: #1CBDD5;
+}
+
+.login-form {
+    background-color: white;
+    height: 300px;
+    width: 500px;
+    margin: 180px auto;
+    margin-bottom: 350px;
+    border: 0.5px solid lightgray; 
+    border-radius: 3px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: floralwhite;
+}

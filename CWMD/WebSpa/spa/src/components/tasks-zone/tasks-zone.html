@@ -1,21 +1,43 @@
 ﻿<div class="container">
     <h1>Tasks zone</h1>
-    <ul>
-        <li>Flux</li>
-        <li>Document</li>
-        <li>Raspuns</li>
-    </ul>
-    <ul >
-        <li ng-repeat="task in $ctrl.tasks">
-            <div>{{task.flux}} {{task.document}} 
-            {{task.answer}}
-                <select ng-model="task.answer" ng-change="$ctrl.updateAnswer(task)">
-                    <option disabled selected hidden>{{task.answer}}</option>
-                    <option ng-repeat="option in $ctrl.answerOptions">{{option.name}}</option>
-                </select>
+    <div>
+        <div class="table-headers">
+            <div class="table-header">
+                <p>Flux</p>
             </div>
-        </li>
-    </ul>
+            <div class="table-header">
+                <p>Document</p>
+            </div>
+            <div class="table-header">
+                <p>Status</p>
+            </div>
+        </div>
+        <div class="table-rows">
+            <ul>
+                <li ng-repeat="task in $ctrl.tasks">
+                    <div class="table-row">
+                        <div class="flux-element">
+                            <p>{{task.flux}}</p>
+                        </div>
+                        <div class="document-element">
+                            <p>{{task.document}}</p>
+                        </div>
+                        <div class="status-element">
+                            <div class="dropdown-element">
+                                <p>
+                                    <select ng-model="task.answer" ng-change="$ctrl.updateAnswer(task)">
+                                        <option disabled selected hidden>{{task.answer}}</option>
+                                        <option ng-repeat="answer in $ctrl.answerOptions">{{answer.name}}</option>
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div ui-view></div>

@@ -184,10 +184,12 @@
     <Content Include="spa\src\components\finished-tasks\finished-tasks.js" />
     <Content Include="spa\src\components\initial-tasks\initial-tasks.html" />
     <Content Include="spa\src\components\initial-tasks\initial-tasks.js" />
+    <Content Include="spa\src\components\login\Login.css" />
     <Content Include="spa\src\components\login\login.html" />
     <Content Include="spa\src\components\login\login.js" />
     <Content Include="spa\src\components\side-menu\side-menu.html" />
     <Content Include="spa\src\components\side-menu\side-menu.js" />
+    <Content Include="spa\src\components\tasks-zone\task-zone.css" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.html" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.js" />
     <Content Include="spa\src\components\work-zone\work-zone.html" />
