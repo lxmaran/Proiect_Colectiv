@@ -9,7 +9,7 @@
         <li ng-repeat="task in $ctrl.tasks">
             <div>{{task.flux}} {{task.document}} 
             {{task.answer}}
-                <select ng-model="task.answer" ng-change="$ctrl.updateAnswer(task)">
+                <select ng-model="task.answer.name" ng-change="$ctrl.updateAnswer(task)">
                     <option disabled selected hidden>{{task.answer}}</option>
                     <option ng-repeat="option in $ctrl.answerOptions">{{option.name}}</option>
                 </select>

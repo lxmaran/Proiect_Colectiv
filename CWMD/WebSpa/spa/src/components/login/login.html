@@ -2,18 +2,18 @@
     <h1>{{$ctrl.title}}</h1>
     <div class="form-group">
         <label class="sr-only" for="exampleInputEmail3">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email" ng-model="username">
+        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email" ng-model="$ctrl.username">
     </div>
     <div class="form-group">
         <label class="sr-only" for="exampleInputPassword3">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" ng-model="password">
+        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" ng-model="$ctrl.password">
     </div>
     <div class="checkbox">
         <label>
             <input type="checkbox"> Remember me
         </label>
     </div>
-    <button type="submit" class="btn btn-default" ng-click="$ctrl.logIn(username,password)">Log in</button>
+    <button type="submit" class="btn btn-default" ng-click="$ctrl.logIn($ctrl.username,$ctrl.password)">Log in</button>
     <button type="submit" class="btn btn-default" ng-click="$ctrl.goToHome()">Skip login</button>
 </form>
 <div ui-view class="container"></div>
