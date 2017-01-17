@@ -5,7 +5,7 @@ app
         templateUrl: 'spa/src/components/login/login.html',
         controller: function ($scope, $state, LoginService, SweetAlert) {
             const $ctrl = this;
-            $ctrl.title = 'asd';
+            $ctrl.title = 'Login';
             $ctrl.logIn = (username, password) => LoginService.login(username, password)
                 .then(response => {
                     if (response.status === 200) {
