@@ -10,6 +10,13 @@ namespace Services.Services
 {
     public class UserService : IUserService
     {
+        private IBaseEntityRepository<User> _userRepository;
+
+        public UserService(IBaseEntityRepository<User> userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         public User FindUser(string userName, string password)
         {
             using (var context = new MyDbContext())

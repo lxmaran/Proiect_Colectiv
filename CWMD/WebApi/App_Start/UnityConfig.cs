@@ -4,6 +4,7 @@ using Contracts.IServices;
 using Services;
 using Services.Services;
 using Unity.WebApi;
+using Dal;
 
 namespace WebApi
 {
@@ -16,6 +17,9 @@ namespace WebApi
             UnityContainerConfig.Configure(container);
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+
+            container.RegisterType<IMyDbContext, MyDbContext>();
+            container.RegisterType(typeof(IBaseEntityRepository<>), typeof(BaseEntityRepository<>));
         }
     }
 }
