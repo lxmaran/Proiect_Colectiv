@@ -41,15 +41,17 @@ namespace Dal
         System.Data.Entity.DbSet<Flow> Flows { get; set; } // Flows
         System.Data.Entity.DbSet<FlowType> FlowTypes { get; set; } // FlowTypes
         System.Data.Entity.DbSet<FlowTypesContributor> FlowTypesContributors { get; set; } // FlowTypes_Contributors
+        System.Data.Entity.DbSet<Log> Logs { get; set; } // Logs
         System.Data.Entity.DbSet<Person> People { get; set; } // Persons
         System.Data.Entity.DbSet<Role> Roles { get; set; } // Roles
         System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; } // sysdiagrams
         System.Data.Entity.DbSet<User> Users { get; set; } // Users
-        IDbSet<T> Set<T>() where T : class, IBaseEntity;
-        DbEntityEntry Entry(object entity);
+
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
         System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken);
+        IDbSet<T> Set<T>() where T : class;
+        DbEntityEntry Entry(object entity);
     }
 
     #endregion
@@ -63,20 +65,16 @@ namespace Dal
         public System.Data.Entity.DbSet<Flow> Flows { get; set; } // Flows
         public System.Data.Entity.DbSet<FlowType> FlowTypes { get; set; } // FlowTypes
         public System.Data.Entity.DbSet<FlowTypesContributor> FlowTypesContributors { get; set; } // FlowTypes_Contributors
+        public System.Data.Entity.DbSet<Log> Logs { get; set; } // Logs
         public System.Data.Entity.DbSet<Person> People { get; set; } // Persons
         public System.Data.Entity.DbSet<Role> Roles { get; set; } // Roles
         public System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; } // sysdiagrams
         public System.Data.Entity.DbSet<User> Users { get; set; } // Users
 
-        public IDbSet<T> Set<T>() where T : class, IBaseEntity
+        static MyDbContext()
         {
-            return base.Set<T>();
+            System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
         }
-
-        //static MyDbContext()
-        //{
-        //    System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
-        //}
 
         public MyDbContext()
             : base("Name=DbContext")
@@ -125,6 +123,7 @@ namespace Dal
             modelBuilder.Configurations.Add(new FlowConfiguration());
             modelBuilder.Configurations.Add(new FlowTypeConfiguration());
             modelBuilder.Configurations.Add(new FlowTypesContributorConfiguration());
+            modelBuilder.Configurations.Add(new LogConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new RoleConfiguration());
             modelBuilder.Configurations.Add(new SysdiagramConfiguration());
@@ -137,11 +136,17 @@ namespace Dal
             modelBuilder.Configurations.Add(new FlowConfiguration(schema));
             modelBuilder.Configurations.Add(new FlowTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new FlowTypesContributorConfiguration(schema));
+            modelBuilder.Configurations.Add(new LogConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonConfiguration(schema));
             modelBuilder.Configurations.Add(new RoleConfiguration(schema));
             modelBuilder.Configurations.Add(new SysdiagramConfiguration(schema));
             modelBuilder.Configurations.Add(new UserConfiguration(schema));
             return modelBuilder;
+        }
+
+        IDbSet<T> IMyDbContext.Set<T>()
+        {
+            return this.Set<T>();
         }
     }
     #endregion
@@ -155,6 +160,7 @@ namespace Dal
         public System.Data.Entity.DbSet<Flow> Flows { get; set; }
         public System.Data.Entity.DbSet<FlowType> FlowTypes { get; set; }
         public System.Data.Entity.DbSet<FlowTypesContributor> FlowTypesContributors { get; set; }
+        public System.Data.Entity.DbSet<Log> Logs { get; set; }
         public System.Data.Entity.DbSet<Person> People { get; set; }
         public System.Data.Entity.DbSet<Role> Roles { get; set; }
         public System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; }
@@ -166,6 +172,7 @@ namespace Dal
             Flows = new FakeDbSet<Flow>("Id");
             FlowTypes = new FakeDbSet<FlowType>("Id");
             FlowTypesContributors = new FakeDbSet<FlowTypesContributor>("Id", "PersonId");
+            Logs = new FakeDbSet<Log>("Id");
             People = new FakeDbSet<Person>("Id");
             Roles = new FakeDbSet<Role>("Id");
             Sysdiagrams = new FakeDbSet<Sysdiagram>("DiagramId");
@@ -200,7 +207,7 @@ namespace Dal
             Dispose(true);
         }
 
-        IDbSet<T> IMyDbContext.Set<T>()
+        public IDbSet<T> Set<T>() where T : class
         {
             throw new NotImplementedException();
         }
@@ -469,7 +476,7 @@ namespace Dal
 
     // Documents
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class Document: IBaseEntity
+    public class Document
     {
         public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 50)
@@ -499,7 +506,7 @@ namespace Dal
 
     // Flows
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class Flow : IBaseEntity
+    public class Flow
     {
         public int Id { get; set; } // Id (Primary key)
         public int FlowTypeId { get; set; } // FlowTypeId
@@ -513,7 +520,7 @@ namespace Dal
 
     // FlowTypes
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class FlowType : IBaseEntity
+    public class FlowType
     {
         public int Id { get; set; } // Id (Primary key)
         public string Type { get; set; } // Type (length: 50)
@@ -531,7 +538,7 @@ namespace Dal
 
     // FlowTypes_Contributors
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class FlowTypesContributor : IBaseEntity
+    public class FlowTypesContributor
     {
         public int Id { get; set; } // Id (Primary key)
         public int PersonId { get; set; } // PersonId (Primary key)
@@ -542,9 +549,19 @@ namespace Dal
         public virtual Person Person { get; set; } // FK__FlowTypes__Perso__08B54D69
     }
 
+    // Logs
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class Log
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int UserId { get; set; } // UserId
+        public string EventName { get; set; } // EventName (length: 50)
+        public string EventDate { get; set; } // EventDate (length: 50)
+    }
+
     // Persons
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class Person : IBaseEntity
+    public class Person
     {
         public int Id { get; set; } // Id (Primary key)
         public int RoleId { get; set; } // RoleId
@@ -568,7 +585,7 @@ namespace Dal
 
     // Roles
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class Role : IBaseEntity
+    public class Role
     {
         public int Id { get; set; } // Id (Primary key)
         public string Role_ { get; set; } // Role (length: 50)
@@ -595,7 +612,7 @@ namespace Dal
 
     // Users
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
-    public class User : IBaseEntity
+    public class User
     {
         public int Id { get; set; } // Id (Primary key)
         public string UserName { get; set; } // UserName (length: 50)
@@ -706,6 +723,27 @@ namespace Dal
         }
     }
 
+    // Logs
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
+    public class LogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Log>
+    {
+        public LogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LogConfiguration(string schema)
+        {
+            ToTable("Logs", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UserId).HasColumnName(@"UserId").IsRequired().HasColumnType("int");
+            Property(x => x.EventName).HasColumnName(@"EventName").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+            Property(x => x.EventDate).HasColumnName(@"EventDate").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
+        }
+    }
+
     // Persons
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.24.0.0")]
     public class PersonConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Person>
@@ -790,7 +828,7 @@ namespace Dal
             Property(x => x.Password).HasColumnName(@"Password").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(250);
 
             // Foreign keys
-            HasRequired(a => a.Person).WithOptional(b => b.User).WillCascadeOnDelete(false); // FK__Users__Id__1AD3FDA4
+            HasRequired(a => a.Person).WithOptional(b => b.User); // FK__Users__Id__1AD3FDA4
         }
     }
 

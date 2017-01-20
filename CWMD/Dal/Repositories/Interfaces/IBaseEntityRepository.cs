@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public interface IBaseEntityRepository<T> where T: class, IBaseEntity
+    public interface IBaseEntityRepository<T> where T: class
     {
         T GetById(int id);
         void Add(T entity);

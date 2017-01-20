@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public class BaseEntityRepository<T> : IBaseEntityRepository<T> where T : class, IBaseEntity
+    public class BaseEntityRepository<T> : IBaseEntityRepository<T> where T : class
     {
         private readonly IMyDbContext _context;
         private IDbSet<T> _entities;
