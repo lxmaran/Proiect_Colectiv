@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "Dal\Dal.csproj", "{9F360E1F-CC7C-42F8-A75F-576C8F4E7468}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9AD8494D-156C-44C3-8DD3-17A212CEF3FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{06DAFF8C-2251-4860-B6F4-99372A401C17}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{6267CFBD-B97B-4F2F-8429-DB6E8A4125E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpa", "WebSpa\WebSpa.csproj", "{4EA0C95D-152A-4C74-AB5E-E407ABD77684}"
 EndProject
@@ -37,10 +35,6 @@ Global
 		{06DAFF8C-2251-4860-B6F4-99372A401C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06DAFF8C-2251-4860-B6F4-99372A401C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06DAFF8C-2251-4860-B6F4-99372A401C17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6267CFBD-B97B-4F2F-8429-DB6E8A4125E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6267CFBD-B97B-4F2F-8429-DB6E8A4125E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6267CFBD-B97B-4F2F-8429-DB6E8A4125E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6267CFBD-B97B-4F2F-8429-DB6E8A4125E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA0C95D-152A-4C74-AB5E-E407ABD77684}.Release|Any CPU.ActiveCfg = Release|Any CPU
