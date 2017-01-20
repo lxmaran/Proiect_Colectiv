@@ -30,6 +30,7 @@ namespace Dal
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Linq;
 
     #region Unit of work
@@ -45,7 +46,7 @@ namespace Dal
         System.Data.Entity.DbSet<Sysdiagram> Sysdiagrams { get; set; } // sysdiagrams
         System.Data.Entity.DbSet<User> Users { get; set; } // Users
         IDbSet<T> Set<T>() where T : class, IBaseEntity;
-
+        DbEntityEntry Entry(object entity);
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
         System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken);
@@ -72,10 +73,10 @@ namespace Dal
             return base.Set<T>();
         }
 
-        static MyDbContext()
-        {
-            System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
-        }
+        //static MyDbContext()
+        //{
+        //    System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
+        //}
 
         public MyDbContext()
             : base("Name=DbContext")
@@ -200,6 +201,11 @@ namespace Dal
         }
 
         IDbSet<T> IMyDbContext.Set<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DbEntityEntry Entry(object entity)
         {
             throw new NotImplementedException();
         }

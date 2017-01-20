@@ -19,22 +19,18 @@ namespace WebApi.Controllers
     public class UserController : ApiController
     {
         private IUserService userService { get; }
-        private IAuthenticationHelper authenticationHelper { get; }
 
-        public UserController(IUserService userService, IAuthenticationHelper authenticationHelper)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
-            this.authenticationHelper = authenticationHelper;
         }
 
         [HttpPost]
-        [EnableCors("*", "*", "*", "*")]
-        [Route("signin")]
-        public IHttpActionResult SignIn([FromBody] UserDto user)
+        [Route("sign-in")]
+        public IHttpActionResult SignIn(UserDto user)
         {
-            var apiBaseUrl = ConfigurationManager.AppSettings[StringConstants.ApiBaseUrl];
-            var token = authenticationHelper.GetAuthorizationToken(apiBaseUrl, user.UserName, user.Password);
-            return Ok(token);
+            var u = userService.FindUser(user.UserName, user.Password);
+            return Ok();
         }
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public class BaseEntityRepository<T> : IBaseRepository<T> where  T: class, IBaseEntity
+    public class BaseEntityRepository<T> : IBaseEntityRepository<T> where T : class, IBaseEntity
     {
         private readonly IMyDbContext _context;
         private IDbSet<T> _entities;
@@ -17,7 +17,7 @@ namespace Dal
             this._context = context;
         }
 
-        private IDbSet<T> Entities
+        protected IDbSet<T> Entities
         {
             get
             {
@@ -29,13 +29,26 @@ namespace Dal
             }
         }
 
+        protected IMyDbContext DbContext
+        {
+            get
+            {
+                return _context;
+            }
+        }
+
         public void Delete(T entity)
         {
+            var entry = this._context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            { 
+                this.Entities.Attach(entity);
+            }
             this.Entities.Remove(entity);
             _context.SaveChanges();
         }
 
-        public IQueryable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return this.Entities;
         }
@@ -45,7 +58,7 @@ namespace Dal
             return this.Entities.Find(id);
         }
 
-        public void Insert(T entity)
+        public void Add(T entity)
         {
             this.Entities.Add(entity);
             _context.SaveChanges();
@@ -53,7 +66,13 @@ namespace Dal
 
         public void Update(T entity)
         {
+            this._context.Entry(entity).State = EntityState.Modified;
             this._context.SaveChanges();
+        }
+
+        public IEnumerable<T> FindBy(Func<T, bool> predicate)
+        {
+            return this.Entities.Where(predicate);
         }
     }
 }

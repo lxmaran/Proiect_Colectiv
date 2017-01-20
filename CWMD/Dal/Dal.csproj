@@ -60,7 +60,9 @@
     <Compile Include="IBaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseEntityRepository.cs" />
-    <Compile Include="Repositories\IBaseEntityRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBaseEntityRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

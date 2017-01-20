@@ -10,6 +10,5 @@ namespace Contracts.IServices
     public interface IUserService
     {
         User FindUser(string username, string password);
-        IList<int> GetUserRoles(int userId);
      }
 }

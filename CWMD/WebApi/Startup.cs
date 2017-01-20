@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using WebApi.Providers;
 
 namespace WebApi
 {
@@ -25,7 +24,7 @@ namespace WebApi
             {
 
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new SimpleAuthorizationServerProvider(),
+                //Provider = new SimpleAuthorizationServerProvider(),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
