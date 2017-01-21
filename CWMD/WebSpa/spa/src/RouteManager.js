@@ -13,7 +13,7 @@
             template: '<dashboard></dashboard>'
         })
         .state('dashboard.initial-tasks',
-        {   
+        {
             url: '/initial-tasks',
             template: '<initial-tasks></initial-tasks>'
         })
@@ -31,5 +31,10 @@
         {
             url: '/work-zone',
             template: '<work-zone></work-zone>'
+        })
+        .state('sign-up',
+        {
+            url: '/sign-up',
+            template: '<sign-up></sign-up>'
         });
 });

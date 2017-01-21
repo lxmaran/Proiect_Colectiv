@@ -189,6 +189,8 @@
     <Content Include="spa\src\components\login\login.js" />
     <Content Include="spa\src\components\side-menu\side-menu.html" />
     <Content Include="spa\src\components\side-menu\side-menu.js" />
+    <Content Include="spa\src\components\sign-up\sign-up.html" />
+    <Content Include="spa\src\components\sign-up\sign-up.js" />
     <Content Include="spa\src\components\tasks-zone\task-zone.css" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.html" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.js" />
@@ -199,6 +201,7 @@
     <Content Include="spa\src\services\AnswersService.js" />
     <Content Include="spa\src\services\DocumentsService.js" />
     <Content Include="spa\src\services\LoginService.js" />
+    <Content Include="spa\src\services\SignUpService.js" />
     <Content Include="spa\src\services\TasksService.js" />
     <Content Include="spa\vendors\angular.min.js" />
     <Content Include="Web.config" />
