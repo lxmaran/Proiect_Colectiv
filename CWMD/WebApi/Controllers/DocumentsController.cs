@@ -83,9 +83,9 @@ namespace WebApi.Controllers
         [Route("")]
         public IHttpActionResult Get()
         {
-            return Ok(new List<DocumentApiDto>
+            return Ok(new List<DocumentDto>
             {
-                new DocumentApiDto
+                new DocumentDto
                 {
                     Id = 1,
                     Name = "Doc1",
@@ -102,7 +102,7 @@ namespace WebApi.Controllers
                     Version = "lastVersion",
                     Flow = "flow 1"
                 },
-                new DocumentApiDto
+                new DocumentDto
                 {
                     Id = 2,
                     Name = "Doc2",
