@@ -1,4 +1,5 @@
-﻿using Dal;
+﻿using Contracts.IServices;
+using Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Services.Services
 {
-    public class DocumentService
+    public class DocumentService: IDocumentService
     {
         private readonly IMyDbContext context;
 
-        public DocumentService(IMyDbContext context)
+        public DocumentService()
         {
-            this.context = context;
+            this.context = new MyDbContext();
         }
 
-        void AddDocument(string fileName, string type, string version)
+        public void AddDocument(string fileName, string type, string version)
         {
             Document doc = new Document()
             {

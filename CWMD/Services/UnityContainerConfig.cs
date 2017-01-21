@@ -7,10 +7,10 @@ namespace Services
 {
     public static class UnityContainerConfig
     {
-        public static void Configure(IUnityContainer container)
+        public static void Configure(UnityContainer container)
         {
-            container.RegisterType<IMyDbContext, MyDbContext>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IDocumentService, DocumentService>();
         }
     }
 }

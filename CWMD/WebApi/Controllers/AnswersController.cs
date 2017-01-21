@@ -23,7 +23,6 @@ namespace WebApi.Controllers
             });
         }
 
-        // GET: api/Answers/5
         public string Get(int id)
         {
             return "value";

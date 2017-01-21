@@ -71,6 +71,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
+    <Content Include="scripts\0001_CWMD_DB_Script.sql" />
+    <Content Include="scripts\0002_CWMD_DB_Script.sql" />
+    <Content Include="scripts\0003_CWMD_DB_Script.sql" />
+    <Content Include="scripts\0004_Create_Logs_Table.sql" />
+    <Content Include="scripts\0005_Add_Answare_Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
