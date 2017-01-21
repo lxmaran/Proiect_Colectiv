@@ -5,6 +5,7 @@ app
         templateUrl: 'spa/src/components/work-zone/work-zone.html',
         controller: function ($scope, DocumentsService) {
             const $ctrl = this;
+            $ctrl.documents = {};
             $scope.fileSelected = function(element) {
                 $ctrl.file = element.files[0];
             };
@@ -20,6 +21,8 @@ app
                 if ($ctrl.file) {
                     reader.readAsDataURL($ctrl.file);
                 }
-            }
+            };
+
+            DocumentsService.getDocuments().then(response => $ctrl.documents = response);
         }
     });

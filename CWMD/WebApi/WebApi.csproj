@@ -308,6 +308,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnswerDto.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentDto.cs" />
     <Compile Include="Models\PersonDto.cs" />
     <Compile Include="Models\TaskDto.cs" />
