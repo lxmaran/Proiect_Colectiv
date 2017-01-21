@@ -192,10 +192,12 @@
     <Content Include="spa\src\components\tasks-zone\task-zone.css" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.html" />
     <Content Include="spa\src\components\tasks-zone\tasks-zone.js" />
+    <Content Include="spa\src\components\work-zone\work-zone.css" />
     <Content Include="spa\src\components\work-zone\work-zone.html" />
     <Content Include="spa\src\components\work-zone\work-zone.js" />
     <Content Include="spa\src\RouteManager.js" />
     <Content Include="spa\src\services\AnswersService.js" />
+    <Content Include="spa\src\services\DocumentsService.js" />
     <Content Include="spa\src\services\LoginService.js" />
     <Content Include="spa\src\services\TasksService.js" />
     <Content Include="spa\vendors\angular.min.js" />
