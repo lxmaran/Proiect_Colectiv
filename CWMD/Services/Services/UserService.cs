@@ -13,7 +13,7 @@ namespace Services.Services
         private readonly IMyDbContext context;
         public UserService()
         {
-            this.context = new MyDbContext();
+            context = new MyDbContext();
         }
 
         public User FindUser(string userName, string password)
