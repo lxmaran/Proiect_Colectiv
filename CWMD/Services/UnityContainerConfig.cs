@@ -13,6 +13,7 @@ namespace Services
             container.RegisterType<IDocumentService, DocumentService>();
             container.RegisterType<ITaskService, TaskService>();
             container.RegisterType<IAnswerService, AnswerService>();
+            //container.RegisterType<IDocumentParserService, DocumentParserService>();
         }
     }
 }

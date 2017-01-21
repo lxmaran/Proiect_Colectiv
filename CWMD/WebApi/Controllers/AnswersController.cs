@@ -33,7 +33,8 @@ namespace WebApi.Controllers
         public IHttpActionResult Get(int id)
         {
             var answear = AnswerService.GetAnswer(id);
-            return Ok(answear);
+            AnswerDto ans = answear.ToAnswerDto();
+            return Ok( new { Answer = ans });
         }
     }
 }
