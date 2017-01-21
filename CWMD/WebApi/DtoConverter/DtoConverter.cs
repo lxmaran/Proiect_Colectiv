@@ -10,7 +10,7 @@ namespace WebApi.DtoConverter
 {
     public static class DtoConverter
     {
-        public static DocumentDto ToDocumentDto(this DocumentApiDto model)
+        public static DocumentDto ToDocumentDto(this Models.DocumentDto model)
         {
             return new DocumentDto()
             {
