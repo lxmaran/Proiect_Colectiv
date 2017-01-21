@@ -11,4 +11,7 @@
         service.updateTask = task =>
             $http.put('http://localhost:50776/' + `api/tasks/${task.taskId}`, task);
 
+        service.startFlow = task =>
+            $http.post('http://localhost:50776/' + `api/flow`, {documentId: task.documentId, flowTypeId:task.flowTypeId});
+
     });
