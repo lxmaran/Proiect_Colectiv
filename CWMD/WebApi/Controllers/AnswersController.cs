@@ -27,13 +27,14 @@ namespace WebApi.Controllers
             var answers = new List<AnswerDto>();
             var ans = AnswerService.GetAll();
             answers = ans.Select(a => a.ToAnswerDto()).ToList();
-            return Ok(new { Documents = answers });
+            return Ok(new { Answers = answers });
         }
 
         public IHttpActionResult Get(int id)
         {
             var answear = AnswerService.GetAnswer(id);
-            return Ok(answear);
+            AnswerDto ans = answear.ToAnswerDto();
+            return Ok( new { Answer = ans });
         }
     }
 }
