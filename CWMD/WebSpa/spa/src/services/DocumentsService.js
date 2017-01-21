@@ -13,4 +13,8 @@
                 .get('http://localhost:50776/' + `api/documents`)
                 .then(response => response.data);
 
+        service.startFlow = task =>
+            $http.post('http://localhost:50776/' + `api/flow`, { documentId: task.documentId, flowTypeId: task.flowTypeId });
+
+
     });

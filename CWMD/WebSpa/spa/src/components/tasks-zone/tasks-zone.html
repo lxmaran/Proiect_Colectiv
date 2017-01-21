@@ -19,11 +19,7 @@
                 <li ng-repeat="task in $ctrl.tasks">
                     <div class="table-row">
                         <div class="flux-element">
-                            <p>{{task.flux}} 
-                                <button ng-click="$ctrl.startFlow(task)" type="button" class="btn btn-default btn-sm" style="margin-left: 20px;">
-                                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Start
-                                </button>
-                            </p>
+                            <p>{{task.flux}}</p>
                         </div>
                         <div class="document-element">
                             <p>{{task.document}}</p>

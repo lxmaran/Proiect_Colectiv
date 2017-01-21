@@ -24,5 +24,8 @@ app
             };
 
             DocumentsService.getDocuments().then(response => $ctrl.documents = response);
+
+            $ctrl.startFlow = task => DocumentsService.startFlow(document).then(response => DocumentsService.getDocuments().then(response => $ctrl.documents = response));
+
         }
     });
