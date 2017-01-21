@@ -30,5 +30,14 @@ namespace WebApi.DtoConverter
                 Flow = "set after parsing",
             };
         }
+
+        public static AnswerDto ToAnswerDto( this Answare model)
+        {
+            return new AnswerDto()
+            {
+                AnswerId = model.Id,
+                Name = model.Name
+            };
+        }
     }
 }

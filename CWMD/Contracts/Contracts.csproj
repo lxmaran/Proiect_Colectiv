@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IServices\IAnswerService.cs" />
     <Compile Include="Dtos\DocumentDto.cs" />
     <Compile Include="Dtos\PersonDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="IServices\IDocumentParserService.cs" />
     <Compile Include="IServices\IDocumentService.cs" />
     <Compile Include="IServices\IPersonService.cs" />
+    <Compile Include="IServices\ITaskService.cs" />
     <Compile Include="IServices\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

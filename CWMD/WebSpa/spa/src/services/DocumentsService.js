@@ -3,6 +3,11 @@
 
         const service = this;
 
+        service.uploadDocument = (doc) =>
+            $http
+            .post('http://localhost:50776/' + `api/documents`, {data: doc})
+            .then(response => response, errno => errno);
+
         service.getDocuments = () =>
             $http
                 .get('http://localhost:50776/' + `api/documents`)

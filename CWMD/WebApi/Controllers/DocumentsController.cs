@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -32,37 +33,36 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("")]
-        public IHttpActionResult Add()
+        public IHttpActionResult Add(Documnet document)
         {
-            try
-            {
-                var provider = new MultipartFormDataStreamProvider(root);
+            byte[] data = Convert.FromBase64String(document.Data.Split(',').Last());
+            var str = Encoding.UTF8.GetString(data);
+            return Ok();
 
-                var filesReadToProvider = Request.Content.ReadAsMultipartAsync(provider);
+//            try
+//            {
+//                var provider = new MultipartFormDataStreamProvider(root);
 
                 foreach (var file in provider.FileData)
                 {
                     var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-
-                    Dictionary<string, string> contentControllerData = DocumentServiceParser.parseDocument(fileName);                  
-
                     var filePath = root + fileName;
-                    var type = "";
+                    string version = "";
 
                     if (!File.Exists(filePath))
                     {
-                        type = "DRAFT";
+                        version = "DRAFT";
                     }
                     else
                     {
-                        type = "FINAL";
+                        version = "FINAL";
                     }
 
                     byte[] documentData;
 
                     documentData = File.ReadAllBytes(file.LocalFileName);
 
-                    var version = "0.1";
+                    var type = Path.GetExtension(fileName);
 
                     DocumentService.AddDocument(fileName, type, version);
 
@@ -86,7 +86,48 @@ namespace WebApi.Controllers
             return Ok(new { Documents = documents });
         }
 
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult Get()
+        {
+            return Ok(new List<DocumentApiDto>
+            {
+                new DocumentApiDto
+                {
+                    Id = 1,
+                    Name = "Doc1",
+                    Type = "type1",
+                    AddedDate = DateTime.Today,
+                    UpdatedDate = DateTime.Today,
+                    PersonId = 1,
+                    Person = new Person()
+                    {
+                        Id = 1,
+                        FirstName = "Aurel",
+                        LastName = "Dubas",
+                    },
+                    Version = "lastVersion",
+                    Flow = "flow 1"
+                },
+                new DocumentApiDto
+                {
+                    Id = 2,
+                    Name = "Doc2",
+                    Type = "type2",
+                    AddedDate = DateTime.Today,
+                    UpdatedDate = DateTime.Today,
+                    PersonId = 1,
+                    Person = new Person()
+                    {
+                        Id = 1,
+                        FirstName = "Aurel",
+                        LastName = "Dubas",
+                    },
+                    Version = "some version",
+                    Flow = "flow 2"
+                }
+            });
+        }
+
     }
 }
-
-
