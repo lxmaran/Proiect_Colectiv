@@ -29,5 +29,11 @@ namespace Services.Services
                .FirstOrDefault();
             return answer;
         }
+
+        public int GetIdByName(string answerName)
+        {
+            var id = context.Answares.FirstOrDefault(a => a.Name == answerName).Id;
+            return id;
+        }
     }
 }

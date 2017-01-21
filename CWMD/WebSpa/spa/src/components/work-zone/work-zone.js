@@ -15,7 +15,7 @@ app
                 var reader = new FileReader();
                 reader.addEventListener("load",
                     function() {
-                        DocumentsService.uploadDocument(reader.result);
+                        DocumentsService.uploadDocument(reader.result,$ctrl.file.name);
                     },
                     false);
                 if ($ctrl.file) {

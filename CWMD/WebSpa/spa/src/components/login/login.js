@@ -18,6 +18,7 @@ app
                         $ctrl.username = '';
                     }
                 });
+            $ctrl.signUp = () => $state.go('sign-up');
             $ctrl.goToHome = () => $state.go('dashboard');
         }
     });

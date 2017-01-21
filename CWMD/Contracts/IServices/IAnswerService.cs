@@ -14,5 +14,7 @@ namespace Contracts.IServices
         IEnumerable<Answare> GetAll();
 
         Answare GetAnswer(int id);
+
+        int GetIdByName(string answerName);
     }
 }

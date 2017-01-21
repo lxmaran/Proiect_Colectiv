@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Script.Serialization;
+using WebApi.Models;
 
 namespace WebApi.Controllers
 {
@@ -28,6 +29,15 @@ namespace WebApi.Controllers
         public IHttpActionResult SignIn(UserDto user)
         {
             var u = UserService.FindUser(user.UserName, user.Password);
+            return Ok();
+        }
+
+
+        [HttpPut]
+        [Route("sign-up")]
+        public IHttpActionResult SignUp(UserDto user)
+        {
+            PersonDto person = user.Person;
             return Ok();
         }
 
