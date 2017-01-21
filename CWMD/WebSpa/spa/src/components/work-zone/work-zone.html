@@ -1,12 +1,12 @@
 ﻿<form name="newFilesForm" role="form" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="newFiles">Select and upload new photos</label>
-        <input type="file" id="newFiles" class="uploadFile" value="Choose a file">
+        <input type="file" ng-model="$ctrl.file" ng-change="$ctrl.previewFile()"><br>
+        <img src="" height="200" alt="Image preview...">
     </div>
 
     <div class="form-group">
         <input class="btn btn-primary" type="button" value="Download Template" id="upload">
-        <input class="btn btn-warning" type="button" value="Upload template" id="upload" />
+        <input class="btn btn-warning" type="button" value="Upload template" id="upload"  ng-click="$ctrl.previewFile()"/>
     </div>
 </form>
 <div ui-view></div>

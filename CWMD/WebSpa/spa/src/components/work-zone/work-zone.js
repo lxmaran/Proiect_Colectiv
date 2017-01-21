@@ -3,26 +3,25 @@ app
     .component('workZone',
     {
         templateUrl: 'spa/src/components/work-zone/work-zone.html',
-        controller: function () {
+        controller: function($scope, DocumentsService) {
             const $ctrl = this;
-            $ctrl.files = [];
+            $scope.fileSelected = function(element) {
+                $ctrl.file = element.files[0];
+            };
 
-            function uploadFiles(files){
-                Upload.upload({
-                    url: apiUrl,
-                    data: { file: files }
-                })
-                  .then(function (response) {
-                      
-                  }, function (err) {
-                      console.log("Error status: " + err.status);
-                     
-                  });
-
-                $window.location.reload();
+            $ctrl.previewFile = () => {
+                var preview = document.querySelector('img');
+                $ctrl.file = document.querySelector('input[type=file]').files[0];
+                var reader = new FileReader();
+                reader.addEventListener("load",
+                    function() {
+                        DocumentsService.uploadDocument(reader.result);
+                    },
+                    false);
+                if ($ctrl.file) {
+                    reader.readAsDataURL($ctrl.file);
+                }
+//                
             }
-
-            $ctrl.uploadFiles = uploadFiles;
-
         }
     });

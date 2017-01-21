@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -10,6 +11,7 @@ using Contracts.Dtos;
 using Contracts.IServices;
 using Dal;
 using WebApi.DtoConverter;
+using Task = System.Threading.Tasks.Task;
 
 
 namespace WebApi.Controllers
@@ -27,56 +29,64 @@ namespace WebApi.Controllers
         private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
 
         [HttpPost]
-        public async Task<IHttpActionResult> Add()
+        [Route("")]
+        public IHttpActionResult Add(Documnet document)
         {
-            try
-            {
-                var provider = new MultipartFormDataStreamProvider(root);
+            byte[] data = Convert.FromBase64String(document.Data.Split(',').Last());
+            var str = Encoding.UTF8.GetString(data);
+            return Ok();
 
-                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync(provider);
+//            try
+//            {
+//                var provider = new MultipartFormDataStreamProvider(root);
 
-                foreach (var file in provider.FileData)
-                {
-                    var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-                    var filePath = root + fileName;
-                    string version = "";
+//                var filesReadToProvider = Request.Content.(provider);
 
-                    if (!File.Exists(filePath))
-                    {
-                        version = "DRAFT";
-                    }
-                    else
-                    {
-                        version = "FINAL";
-                    }
-
-                    byte[] documentData;
-
-                    documentData = File.ReadAllBytes(file.LocalFileName);
-
-                    var type = Path.GetExtension(fileName);
-
-                    DocumentService.AddDocument(fileName, type, version);
-
-                }
-                return Ok(new { Message = "Document uploaded ok" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.GetBaseException().Message);
-            }
+//                foreach (var file in provider.FileData)
+//                {
+//                    var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+//                    var filePath = root + fileName;
+//                    string version = "";
+//
+//                    if (!File.Exists(filePath))
+//                    {
+//                        version = "DRAFT";
+//                    }
+//                    else
+//                    {
+//                        version = "FINAL";
+//                    }
+//
+//                    byte[] documentData;
+//
+//                    documentData = File.ReadAllBytes(file.LocalFileName);
+//
+//                    var type = Path.GetExtension(fileName);
+//
+//                    DocumentService.AddDocument(fileName, type, version);
+//
+//                }
+//                return Ok(new { Message = "Document uploaded ok" });
+//            }
+//            catch (Exception ex)
+//            {
+//                return BadRequest(ex.GetBaseException().Message);
+//            }
 
         }
 
-        public async Task<IHttpActionResult> GetAllDocuments()
+        public class Documnet
+        {
+            public string Data { get; set; }
+            public string Name { get; set; }
+        }
+
+        public IHttpActionResult GetAllDocuments()
         {
             var documents = new List<WorkZoneDocumentsDto>();
-
-            await Task.Factory.StartNew(() =>
-            {               
+             
                 var docs = DocumentService.GetAll();
                 documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
-            });
 
             return Ok(new { Documents = documents });
         }
