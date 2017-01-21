@@ -48,10 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationHelpers\AuthenticationHelper.cs" />
-    <Compile Include="AuthenticationHelpers\IAuthenticationHelper.cs" />
-    <Compile Include="AuthenticationHelpers\Token.cs" />
-    <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Dtos\PersonDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="IServices\IPersonService.cs" />

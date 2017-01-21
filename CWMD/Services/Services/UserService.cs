@@ -10,21 +10,16 @@ namespace Services.Services
 {
     public class UserService : IUserService
     {
-        private IUserRepository _userRepository;
-        private IBaseEntityRepository<Person> _personRepo;
-
-        public UserService(IUserRepository userRepository, IBaseEntityRepository<Person> personRepo)
+        private readonly IMyDbContext context;
+        public UserService(IMyDbContext context)
         {
-            _userRepository = userRepository;
-            _personRepo = personRepo;
+            this.context = context;
         }
 
         public User FindUser(string userName, string password)
         {
-            var user = _userRepository.FindBy(u => u.UserName == userName && u.Password == password)
+            var user =context.Users.Where(u => u.UserName == userName && u.Password == password)
                 .FirstOrDefault();
-
-            var role = _userRepository.GetUserRole(user.Id);
             return user;
         }
     }

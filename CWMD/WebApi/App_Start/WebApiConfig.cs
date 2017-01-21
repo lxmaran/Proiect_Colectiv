@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using WebApi.App_Start;
 
 namespace WebApi
 {
@@ -17,8 +16,6 @@ namespace WebApi
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
-            AutofacConfig.ResolveComponents(config);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

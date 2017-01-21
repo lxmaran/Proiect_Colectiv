@@ -253,7 +253,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -363,10 +362,6 @@
     <ProjectReference Include="..\Dal\Dal.csproj">
       <Project>{9F360E1F-CC7C-42F8-A75F-576C8F4E7468}</Project>
       <Name>Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapper\Mapper.csproj">
-      <Project>{6267cfbd-b97b-4f2f-8429-db6e8a4125e5}</Project>
-      <Name>Mapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{9ad8494d-156c-44c3-8dd3-17a212cef3fb}</Project>
