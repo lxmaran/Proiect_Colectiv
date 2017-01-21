@@ -23,6 +23,7 @@ namespace WebApi.Controllers
     public class DocumentsController : ApiController
     {
         IDocumentService DocumentService { get; }
+        IDocumentParserService DocumentParserService { get; }
 
         public DocumentsController(IDocumentService _documentService)
         {
@@ -46,6 +47,10 @@ namespace WebApi.Controllers
                 foreach (var file in provider.FileData)
                 {
                     var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+
+                    //!! parse word doc for content controllers
+                    Dictionary<string, string> contentControllerData = DocumentParserService.parseDocument(fileName);
+
                     var filePath = root + fileName;
                     string version = "";
 
