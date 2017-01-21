@@ -21,6 +21,7 @@ namespace WebApi.Controllers
     public class DocumentsController : ApiController
     {
         IDocumentService DocumentService { get; }
+        IDocumentParserService DocumentServiceParser { get; }
 
         public DocumentsController(IDocumentService _documentService)
         {
@@ -30,6 +31,7 @@ namespace WebApi.Controllers
         private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
 
         [HttpPost]
+        [Route("")]
         public IHttpActionResult Add()
         {
             try
@@ -41,23 +43,26 @@ namespace WebApi.Controllers
                 foreach (var file in provider.FileData)
                 {
                     var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+
+                    Dictionary<string, string> contentControllerData = DocumentServiceParser.parseDocument(fileName);                  
+
                     var filePath = root + fileName;
-                    string version = "";
+                    var type = "";
 
                     if (!File.Exists(filePath))
                     {
-                        version = "DRAFT";
+                        type = "DRAFT";
                     }
                     else
                     {
-                        version = "FINAL";
+                        type = "FINAL";
                     }
 
                     byte[] documentData;
 
                     documentData = File.ReadAllBytes(file.LocalFileName);
 
-                    var type = Path.GetExtension(fileName);
+                    var version = "0.1";
 
                     DocumentService.AddDocument(fileName, type, version);
 
@@ -71,56 +76,17 @@ namespace WebApi.Controllers
 
         }
 
-        public IHttpActionResult GetAllDocuments()
-        {
-            var documents = new List<WorkZoneDocumentsDto>();        
-            var docs = DocumentService.GetAll();
-            documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
-            return Ok(new { Documents = documents });
-        }
-
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
-            return Ok(new List<DocumentApiDto>
-            {
-                new DocumentApiDto
-                {
-                    Id = 1,
-                    Name = "Doc1",
-                    Type = "type1",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "lastVersion",
-                    Flow = "flow 1"
-                },
-                new DocumentApiDto
-                {
-                    Id = 2,
-                    Name = "Doc2",
-                    Type = "type2",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "some version",
-                    Flow = "flow 2"
-                }
-            });
+            var documents = new List<DocumentApiDto>();
+            var docs = DocumentService.GetAll();
+            documents = docs.Select(d => d.ToDocumentApiDto()).ToList();
+            return Ok(new { Documents = documents });
         }
 
     }
 }
+
+

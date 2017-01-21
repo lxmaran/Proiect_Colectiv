@@ -13,5 +13,6 @@ namespace Contracts.IServices
         IEnumerable<Document> GetAll();
        
         void AddDocument(string fileName, string type, string version);
+        User GetCurrentUser();
     }
 }
