@@ -11,6 +11,7 @@ using System.Web.Http;
 using Contracts.Dtos;
 using Contracts.IServices;
 using Dal;
+using Services.Services;
 using WebApi.DtoConverter;
 using WebApi.Models;
 using Task = System.Threading.Tasks.Task;
@@ -31,17 +32,15 @@ namespace WebApi.Controllers
         private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
 
         [HttpPost]
-        public IHttpActionResult Add()
-        [Route("")]
         public IHttpActionResult Add(Documnet document)
         {
             byte[] data = Convert.FromBase64String(document.Data.Split(',').Last());
             var str = Encoding.UTF8.GetString(data);
             return Ok();
 
-//            try
-//            {
-//                var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                var provider = new MultipartFormDataStreamProvider(root);
 
                 foreach (var file in provider.FileData)
                 {
@@ -83,92 +82,5 @@ namespace WebApi.Controllers
             documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
             return Ok(new { Documents = documents });
         }
-
-        [HttpGet]
-        [Route("")]
-        public IHttpActionResult Get()
-        {
-            return Ok(new List<DocumentApiDto>
-            {
-                new DocumentApiDto
-                {
-                    Id = 1,
-                    Name = "Doc1",
-                    Type = "type1",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "lastVersion",
-                    Flow = "flow 1"
-                },
-                new DocumentApiDto
-                {
-                    Id = 2,
-                    Name = "Doc2",
-                    Type = "type2",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "some version",
-                    Flow = "flow 2"
-                }
-            });
-        }
-
-        [HttpGet]
-        [Route("")]
-        public IHttpActionResult Get()
-        {
-            return Ok(new List<DocumentApiDto>
-            {
-                new DocumentApiDto
-                {
-                    Id = 1,
-                    Name = "Doc1",
-                    Type = "type1",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "lastVersion",
-                    Flow = "flow 1"
-                },
-                new DocumentApiDto
-                {
-                    Id = 2,
-                    Name = "Doc2",
-                    Type = "type2",
-                    AddedDate = DateTime.Today,
-                    UpdatedDate = DateTime.Today,
-                    PersonId = 1,
-                    Person = new Person()
-                    {
-                        Id = 1,
-                        FirstName = "Aurel",
-                        LastName = "Dubas",
-                    },
-                    Version = "some version",
-                    Flow = "flow 2"
-                }
-            });
-        }
-
     }
 }

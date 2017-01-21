@@ -49,10 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServices\IAnswerService.cs" />
-    <Compile Include="Dtos\DocumentDto.cs" />
-    <Compile Include="Dtos\PersonDto.cs" />
-    <Compile Include="Dtos\UserDto.cs" />
-    <Compile Include="Dtos\WorkZoneDocumentsDto.cs" />
     <Compile Include="IServices\IDocumentService.cs" />
     <Compile Include="IServices\IPersonService.cs" />
     <Compile Include="IServices\ITaskService.cs" />
@@ -60,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dtos\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
