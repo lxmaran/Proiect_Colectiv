@@ -11,6 +11,7 @@ namespace Services
         {
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IDocumentService, DocumentService>();
+            container.RegisterType<ITaskService, TaskService>();
         }
     }
 }

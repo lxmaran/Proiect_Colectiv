@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Contracts.Dtos;
+﻿using Dal;
+using System.Collections.Generic;
 
 namespace Contracts.IServices
 {
     public interface IPersonService
     {
-        IEnumerable<PersonDto> GetAll();
+        IEnumerable<Person> GetAll();
     }
 }

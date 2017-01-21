@@ -8,7 +8,7 @@ using System.Web;
 
 namespace WebApi.Models
 {
-    public class DocumentApiDto
+    public class DocumentDto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
