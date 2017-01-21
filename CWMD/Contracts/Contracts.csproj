@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\DocumentDto.cs" />
     <Compile Include="IServices\IDocumentService.cs" />
     <Compile Include="IServices\IPersonService.cs" />
     <Compile Include="IServices\ITaskService.cs" />
