@@ -32,7 +32,7 @@ namespace Services.Services
 
         }
 
-        public User GetCurrentUser()
+        private User GetCurrentUser()
         {
             string username = Environment.UserName;
             var user = context.Users.FirstOrDefault(u => u.UserName.Equals(username));

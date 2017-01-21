@@ -16,9 +16,9 @@ namespace WebApi.Models
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int PersonId { get; set; }
-       
+        public virtual Person Person { get; set; }
         public int PrincipalDocumentId { get; set; }
-       
+        public virtual Document Document { get; set; }
         public string Version { get; set; }
         public string Flow { get; set; }
     }

@@ -22,7 +22,6 @@ namespace WebApi.Controllers
     public class DocumentsController : ApiController
     {
         IDocumentService DocumentService { get; }
-        IDocumentParserService DocumentServiceParser { get; }
 
         public DocumentsController(IDocumentService _documentService)
         {
@@ -32,6 +31,7 @@ namespace WebApi.Controllers
         private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
 
         [HttpPost]
+        public IHttpActionResult Add()
         [Route("")]
         public IHttpActionResult Add(Documnet document)
         {
@@ -76,14 +76,55 @@ namespace WebApi.Controllers
 
         }
 
+        public IHttpActionResult GetAllDocuments()
+        {
+            var documents = new List<WorkZoneDocumentsDto>();        
+            var docs = DocumentService.GetAll();
+            documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
+            return Ok(new { Documents = documents });
+        }
+
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
-            var documents = new List<DocumentApiDto>();
-            var docs = DocumentService.GetAll();
-            documents = docs.Select(d => d.ToDocumentApiDto()).ToList();
-            return Ok(new { Documents = documents });
+            return Ok(new List<DocumentApiDto>
+            {
+                new DocumentApiDto
+                {
+                    Id = 1,
+                    Name = "Doc1",
+                    Type = "type1",
+                    AddedDate = DateTime.Today,
+                    UpdatedDate = DateTime.Today,
+                    PersonId = 1,
+                    Person = new Person()
+                    {
+                        Id = 1,
+                        FirstName = "Aurel",
+                        LastName = "Dubas",
+                    },
+                    Version = "lastVersion",
+                    Flow = "flow 1"
+                },
+                new DocumentApiDto
+                {
+                    Id = 2,
+                    Name = "Doc2",
+                    Type = "type2",
+                    AddedDate = DateTime.Today,
+                    UpdatedDate = DateTime.Today,
+                    PersonId = 1,
+                    Person = new Person()
+                    {
+                        Id = 1,
+                        FirstName = "Aurel",
+                        LastName = "Dubas",
+                    },
+                    Version = "some version",
+                    Flow = "flow 2"
+                }
+            });
         }
 
         [HttpGet]
