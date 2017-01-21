@@ -17,11 +17,11 @@ namespace WebApi.Controllers
     [RoutePrefix("api/documents")]
     public class DocumentsController : ApiController
     {
-        IDocumentService documentService { get; }
+        IDocumentService DocumentService { get; }
 
         public DocumentsController(IDocumentService _documentService)
         {
-            documentService = _documentService;
+            DocumentService = _documentService;
         }
 
         private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
@@ -56,7 +56,7 @@ namespace WebApi.Controllers
 
                     var type = Path.GetExtension(fileName);
 
-                    documentService.addDocument(fileName, type, version);
+                    DocumentService.AddDocument(fileName, type, version);
 
                 }
                 return Ok(new { Message = "Document uploaded ok" });
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
 
             await Task.Factory.StartNew(() =>
             {               
-                var docs = documentService.GetAll();
+                var docs = DocumentService.GetAll();
                 documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
             });
 

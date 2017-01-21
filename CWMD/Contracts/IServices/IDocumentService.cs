@@ -12,6 +12,6 @@ namespace Contracts.IServices
     {
         IEnumerable<Document> GetAll();
        
-        void addDocument(string fileName, string type, string version);
+        void AddDocument(string fileName, string type, string version);
     }
 }

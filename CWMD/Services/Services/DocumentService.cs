@@ -9,32 +9,38 @@ namespace Services.Services
 {
     public class DocumentService
     {
-        private IUserRepository _userRepository;
-        private IBaseEntityRepository<Document> _documentRepo;
+        private readonly IMyDbContext context;
 
-        public DocumentService(IUserRepository userRepository, IBaseEntityRepository<Document> documentRepo)
+        public DocumentService(IMyDbContext context)
         {
-            _userRepository = userRepository;
-            _documentRepo = documentRepo;
+            this.context = context;
         }
 
-        void addDocument(string fileName, string type, string version)
+        void AddDocument(string fileName, string type, string version)
         {
             Document doc = new Document()
             {
                 Name = fileName,
                 Type = type,
                 Version = version,
-                PersonId = _userRepository.getCurrentUser().Id
+                PersonId = GetCurrentUser().Id
             };
 
-            _documentRepo.Add(doc);
+            context.Documents.Add(doc);
+            context.SaveChanges();
 
+        }
+
+        private User GetCurrentUser()
+        {
+            string username = Environment.UserName;
+            var user = context.Users.Where(u => u.UserName.Equals(username)).FirstOrDefault();
+            return user;
         }
 
         public IEnumerable<Document> GetAll()
         {
-            var docs = _documentRepo.GetAll();
+            var docs = context.Documents.ToList();
             return docs;
         }
     }

@@ -16,18 +16,18 @@ namespace WebApi.Controllers
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        private IUserService userService { get; }
+        private IUserService UserService { get; }
 
         public UserController(IUserService userService)
         {
-            this.userService = userService;
+            UserService = userService;
         }
 
         [HttpPost]
         [Route("sign-in")]
         public IHttpActionResult SignIn(UserDto user)
         {
-            var u = userService.FindUser(user.UserName, user.Password);
+            var u = UserService.FindUser(user.UserName, user.Password);
             return Ok();
         }
 
