@@ -34,7 +34,7 @@ namespace Services.Services
         private User GetCurrentUser()
         {
             string username = Environment.UserName;
-            var user = context.Users.Where(u => u.UserName.Equals(username)).FirstOrDefault();
+            var user = context.Users.FirstOrDefault(u => u.UserName.Equals(username));
             return user;
         }
 

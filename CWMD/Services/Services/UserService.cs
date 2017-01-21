@@ -11,9 +11,9 @@ namespace Services.Services
     public class UserService : IUserService
     {
         private readonly IMyDbContext context;
-        public UserService(IMyDbContext context)
+        public UserService()
         {
-            this.context = context;
+            context = new MyDbContext();
         }
 
         public User FindUser(string userName, string password)
