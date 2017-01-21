@@ -15,6 +15,6 @@ app
 
             $ctrl.updateAnswer = task => TasksService.updateTask(task);
 
-            $ctrl.startFlow = task => TasksService.startFlow(task);
+            $ctrl.startFlow = task => TasksService.startFlow(task).then(response => TasksService.getTasks().then(response => $ctrl.tasks = response));
         }
     });
