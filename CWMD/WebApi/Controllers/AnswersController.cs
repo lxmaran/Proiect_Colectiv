@@ -27,7 +27,7 @@ namespace WebApi.Controllers
             var answers = new List<AnswerDto>();
             var ans = AnswerService.GetAll();
             answers = ans.Select(a => a.ToAnswerDto()).ToList();
-            return Ok(new { Answers = answers });
+            return Ok(answers);
         }
 
         public IHttpActionResult Get(int id)

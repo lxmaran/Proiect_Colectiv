@@ -13,10 +13,12 @@ namespace WebApi.Controllers
     public class TasksController : ApiController
     {
         private ITaskService TaskService { get; }
+        private IAnswerService AnswerService { get; }
 
-        public TasksController(ITaskService taskService)
+        public TasksController(ITaskService taskService, IAnswerService answerService)
         {
             TaskService = taskService;
+            AnswerService = answerService;
         }
 
         [HttpGet]
@@ -38,7 +40,9 @@ namespace WebApi.Controllers
         [Route("{taskId}")]
         public IHttpActionResult Get(int taskId, TaskDto task)
         {
-            TaskService.UpdateAnswear(taskId, task.Answer.AnswerId);
+            //TODO send emails to first person from flow
+            var answeId = AnswerService.GetIdByName(task.Answer.Name);
+            TaskService.UpdateAnswear(taskId, answeId);
             return Ok();
         }
     }

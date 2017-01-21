@@ -3,9 +3,9 @@
 
         const service = this;
 
-        service.uploadDocument = (doc) =>
+        service.uploadDocument = (doc, filename) =>
             $http
-            .post('http://localhost:50776/' + `api/documents`, {data: doc})
+            .post('http://localhost:50776/' + `api/documents`, {data: doc, name:filename})
             .then(response => response, errno => errno);
 
         service.getDocuments = () =>

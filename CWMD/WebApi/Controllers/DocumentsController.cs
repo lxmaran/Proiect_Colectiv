@@ -77,10 +77,12 @@ namespace WebApi.Controllers
 
         public IHttpActionResult GetAllDocuments()
         {
-            var documents = new List<WorkZoneDocumentsDto>();        
+            var documents = new List<DocumentDto>();
+
             var docs = DocumentService.GetAll();
-            documents = docs.Select(d => d.ToWorkZoneDocumentDto()).ToList();                
-            return Ok(new { Documents = documents });
+            documents = docs.Select(d => d.ToDocumentDto()).ToList();
+
+            return Ok(documents);
         }
     }
 }
