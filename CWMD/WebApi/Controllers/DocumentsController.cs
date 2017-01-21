@@ -25,9 +25,10 @@ namespace WebApi.Controllers
         IDocumentService DocumentService { get; }
         IDocumentParserService DocumentParserService { get; }
 
-        public DocumentsController(IDocumentService _documentService)
+        public DocumentsController(IDocumentService _documentService, IDocumentParserService _documentParser)
         {
             DocumentService = _documentService;
+            DocumentParserService = _documentParser;
         }
 
         private readonly string root = HttpContext.Current.Server.MapPath("~/App_Data/");
@@ -37,58 +38,41 @@ namespace WebApi.Controllers
         {
             byte[] data = Convert.FromBase64String(document.Data.Split(',').Last());
             var str = Encoding.UTF8.GetString(data);
-            File.WriteAllBytes(Path.Combine(root, document.Name), data);
+            var g = Guid.NewGuid();
+            document.Name = g.ToString() + document.Name;
+            var filePath = Path.Combine(root, document.Name);
+            File.WriteAllBytes(filePath, data);
+            DocumentService.AddDocument(document.Name, "DRAFT", "1.0");
+            var result = DocumentParserService.DetermineFlowType(filePath);
             return Ok();
-
-            try
-            {
-                var provider = new MultipartFormDataStreamProvider(root);
-
-                foreach (var file in provider.FileData)
-                {
-                    var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-
-                    //!! parse word doc for content controllers
-                    Dictionary<string, string> contentControllerData = DocumentParserService.parseDocument(fileName);
-
-                    var filePath = root + fileName;
-                    string version = "";
-
-                    if (!File.Exists(filePath))
-                    {
-                        version = "DRAFT";
-                    }
-                    else
-                    {
-                        version = "FINAL";
-                    }
-
-                    byte[] documentData;
-
-                    documentData = File.ReadAllBytes(file.LocalFileName);
-
-                    var type = Path.GetExtension(fileName);
-
-                    DocumentService.AddDocument(fileName, type, version);
-
-                }
-                return Ok(new { Message = "Document uploaded ok" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.GetBaseException().Message);
-            }
-
         }
 
         public IHttpActionResult GetAllDocuments()
         {
-            var documents = new List<DocumentDto>();
+            var documents = DocumentService.GetAllWithoutFlow();
+            var docs = new List<DocumentDto>();
 
-            var docs = DocumentService.GetAll();
-            documents = docs.Select(d => d.ToDocumentDto()).ToList();
+            foreach (var model in documents)
+            {
+                var flowType = DocumentParserService.DetermineFlowType(Path.Combine(root, model.Name));
+                var docDto = new DocumentDto
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Type = model.Type,
+                    AddedDate = model.AddedDate,
+                    UpdatedDate = model.UpdatedDate,
+                    PersonId = model.Person.Id,
+                    PrincipalDocumentId = 1,
+                    Version = model.Version,
+                    Flow = flowType.Type,
+                    FlowId = flowType.Id,
+                };
+                docs.Add(docDto);
+            }
 
-            return Ok(documents);
+
+            return Ok(docs);
         }
     }
 }

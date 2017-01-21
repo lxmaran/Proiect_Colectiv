@@ -12,14 +12,23 @@ namespace Services.Services
 {
     public class DocumentParserService : IDocumentParserService
     {
-        private readonly IMyDbContext context;
+        private IMyDbContext context;
 
-        public DocumentParserService(IMyDbContext _context)
+        public DocumentParserService()
         {
-            context = _context;
+            context = new MyDbContext();
         }
 
-        public Dictionary<string, string> parseDocument(string fileName)
+        public FlowType DetermineFlowType(string fileName)
+        {
+            var parseResult = ParseDocument(fileName);
+            var functie = parseResult["functie"].Replace("[", "").Replace("]", "");
+            var cheltuieliAferente = parseResult["cheltuieliAferente"].Replace("[", "").Replace("]", "");
+            var flowType = context.FlowTypes.FirstOrDefault(f => f.Type.ToLower().Contains(functie.ToLower()) && f.Type.ToLower().Contains(cheltuieliAferente.ToLower()));
+            return flowType;
+        }
+
+        private Dictionary<string, string> ParseDocument(string fileName)
         {
             Dictionary<string, string> contentControllerData = new Dictionary<string, string>();
 

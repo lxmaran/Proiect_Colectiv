@@ -44,5 +44,15 @@ namespace Services.Services
             var docs = context.Documents.ToList();
             return docs;
         }
+
+        public IEnumerable<Document> GetAllWithoutFlow()
+        {
+            var documentsWithFlow = (from d in context.Documents
+                             join t in context.Tasks on d.Id equals t.PrincipalDocumentId
+                             select d.Id).ToList();
+            var documents = context.Documents.Where(d => !documentsWithFlow.Contains(d.Id))
+                .ToList();
+            return documents;
+        }
     }
 }

@@ -21,5 +21,7 @@ namespace WebApi.Models
         public virtual Document Document { get; set; }
         public string Version { get; set; }
         public string Flow { get; set; }
+        public int FlowId { get; set; }
+        public int DocumentId { get; set; }
     }
 }

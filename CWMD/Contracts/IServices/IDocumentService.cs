@@ -10,7 +10,7 @@ namespace Contracts.IServices
     public interface IDocumentService
     {
         IEnumerable<Document> GetAll();
-       
+        IEnumerable<Document> GetAllWithoutFlow();
         void AddDocument(string fileName, string type, string version);
         User GetCurrentUser();
     }
