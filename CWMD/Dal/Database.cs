@@ -606,7 +606,7 @@ namespace Dal
         public int FlowTypeId { get; set; } // FlowTypeId
         public int PrincipalDocumentId { get; set; } // PrincipalDocumentId
         public int CurrentPersonOrder { get; set; } // CurrentPersonOrder
-        public int AnswareId { get; set; } // AnswareId
+        public int? AnswareId { get; set; } // AnswareId
 
         // Foreign keys
         public virtual Answare Answare { get; set; } // FK__Tasks__AnswareId__245D67DE
@@ -825,10 +825,10 @@ namespace Dal
             Property(x => x.FlowTypeId).HasColumnName(@"FlowTypeId").IsRequired().HasColumnType("int");
             Property(x => x.PrincipalDocumentId).HasColumnName(@"PrincipalDocumentId").IsRequired().HasColumnType("int");
             Property(x => x.CurrentPersonOrder).HasColumnName(@"CurrentPersonOrder").IsRequired().HasColumnType("int");
-            Property(x => x.AnswareId).HasColumnName(@"AnswareId").IsRequired().HasColumnType("int");
+            Property(x => x.AnswareId).HasColumnName(@"AnswareId").IsOptional().HasColumnType("int");
 
             // Foreign keys
-            HasRequired(a => a.Answare).WithMany(b => b.Tasks).HasForeignKey(c => c.AnswareId).WillCascadeOnDelete(false); // FK__Tasks__AnswareId__245D67DE
+            HasOptional(a => a.Answare).WithMany(b => b.Tasks).HasForeignKey(c => c.AnswareId).WillCascadeOnDelete(false); // FK__Tasks__AnswareId__245D67DE
             HasRequired(a => a.Document).WithMany(b => b.Tasks).HasForeignKey(c => c.PrincipalDocumentId).WillCascadeOnDelete(false); // FK__Flows__Principal__160F4887
             HasRequired(a => a.FlowType).WithMany(b => b.Tasks).HasForeignKey(c => c.FlowTypeId).WillCascadeOnDelete(false); // FK__Flows__FlowTypeI__151B244E
         }

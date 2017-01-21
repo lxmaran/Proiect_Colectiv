@@ -9,4 +9,43 @@
         <input class="btn btn-warning" type="button" value="Upload template" id="upload"  ng-click="$ctrl.previewFile()"/>
     </div>
 </form>
+
+<div class="table-container">
+    <div class="table-headers">
+        <div class="table-header-work">
+            <p>Flow</p>
+        </div>
+        <div class="table-header-work">
+            <p>Version</p>
+        </div>
+
+        <div class="table-header-work">
+            <p>Name</p>
+        </div>
+        <div class="table-header-work">
+            <p>ID</p>
+        </div>
+
+    </div>
+    <div class="table-rows">
+        <ul>
+            <li ng-repeat="document in $ctrl.documents">
+                <div class="table-row">
+                    <div class="work-elem">
+                        <p>{{document.id}}</p>
+                    </div>
+                    <div class="work-elem">
+                        <p>{{document.name}}</p>
+                    </div>
+                    <div class="work-elem">
+                        <p>{{document.version}}</p>
+                    </div>
+                    <div class="work-elem">
+                        <p>{{document.flow}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 <div ui-view></div>

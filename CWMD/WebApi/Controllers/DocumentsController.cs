@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using Contracts.Dtos;
 using Contracts.IServices;
 using Dal;
 using WebApi.DtoConverter;
+using WebApi.Models;
 using Task = System.Threading.Tasks.Task;
 
 

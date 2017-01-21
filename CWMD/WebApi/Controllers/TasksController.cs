@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts.IServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,41 +12,33 @@ namespace WebApi.Controllers
     [RoutePrefix("api/tasks")]
     public class TasksController : ApiController
     {
+        private ITaskService TaskService { get; }
+
+        public TasksController(ITaskService taskService)
+        {
+            TaskService = taskService;
+        }
+
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
-            return Ok(new List<TaskDto>
-            {
-                new TaskDto
+            var tasks = TaskService.GetAll().Select(
+                t => new TaskDto
                 {
-                    TaskId = 1,
-                    Document = "doc1",
-                    Flux = "flux1",
-                    Answer = new AnswerDto
-                    {
-                        AnswerId = 1,
-                        Name = "answer1"
-                    }
-                },
-                new TaskDto
-                {
-                    TaskId = 2,
-                    Document = "doc2",
-                    Flux = "flux2",
-                    Answer = new AnswerDto
-                    {
-                        AnswerId = 2,
-                        Name = "answer2"
-                    }
-                },
-            });
+                    TaskId = t.Id,
+                    Answer = (t.Answare != null) ? new AnswerDto { AnswerId = t.Answare.Id, Name = t.Answare.Name} : null,
+                    Document = t.Document.Name,
+                    Flux = t.FlowType.Type
+                    }).ToList();
+            return Ok(tasks);
         }
 
         [HttpPut]
         [Route("{taskId}")]
         public IHttpActionResult Get(int taskId, TaskDto task)
         {
+            TaskService.UpdateAnswear(taskId, task.Answer.AnswerId);
             return Ok();
         }
     }

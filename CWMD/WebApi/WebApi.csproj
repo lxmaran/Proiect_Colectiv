@@ -308,9 +308,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnswerDto.cs" />
-    <Compile Include="Models\DocumentApiDto.cs" />
-    <Compile Include="Models\PersonApiDto.cs" />
+    <Compile Include="Models\DocumentDto.cs" />
+    <Compile Include="Models\PersonDto.cs" />
     <Compile Include="Models\TaskDto.cs" />
+    <Compile Include="Models\UserDto.cs" />
+    <Compile Include="Models\WorkZoneDocumentsDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
