@@ -82,7 +82,7 @@ namespace WebApi.Controllers
             var docs = DocumentService.GetAll();
             documents = docs.Select(d => d.ToDocumentDto()).ToList();
 
-            return Ok(new { Documents = documents });
+            return Ok(documents);
         }
     }
 }
