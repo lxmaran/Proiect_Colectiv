@@ -29,13 +29,14 @@ namespace WebApi.Controllers
             DocumentService = _documentService;
         }
 
-        private readonly string root = HttpContext.Current.Server.MapPath("~/WebApi/App_Data/");
+        private readonly string root = HttpContext.Current.Server.MapPath("~/App_Data/");
 
         [HttpPost]
         public IHttpActionResult Add(Documnet document)
         {
             byte[] data = Convert.FromBase64String(document.Data.Split(',').Last());
             var str = Encoding.UTF8.GetString(data);
+            File.WriteAllBytes(Path.Combine(root, document.Name), data);
             return Ok();
 
             try

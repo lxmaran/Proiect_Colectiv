@@ -24,7 +24,7 @@ namespace Services.Services
                 Name = fileName,
                 Type = type,
                 Version = version,
-                PersonId = GetCurrentUser().Id
+                PersonId = 1
             };
 
             context.Documents.Add(doc);

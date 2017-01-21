@@ -23,7 +23,7 @@ namespace WebApi.DtoConverter
                 AddedDate = model.AddedDate,
                 UpdatedDate = model.UpdatedDate,
                 PersonId = model.Person.Id,
-                PrincipalDocumentId = docService.GetCurrentUser().Id,
+                PrincipalDocumentId = 1,
                 Version = model.Version
             };
         }
