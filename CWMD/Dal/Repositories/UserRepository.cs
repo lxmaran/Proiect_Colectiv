@@ -21,5 +21,12 @@ namespace Dal
 
             return userRole;
         }
+
+        public User getCurrentUser()
+        {
+            string username = Environment.UserName;
+            var user = DbContext.Users.Where(u => u.UserName.Equals(username)).FirstOrDefault();
+            return user;
+        }
     }
 }

@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseEntityService.cs" />
+    <Compile Include="Services\DocumentService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UnityContainerConfig.cs" />
   </ItemGroup>
@@ -79,10 +80,6 @@
     <ProjectReference Include="..\Dal\Dal.csproj">
       <Project>{9f360e1f-cc7c-42f8-a75f-576c8f4e7468}</Project>
       <Name>Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapper\Mapper.csproj">
-      <Project>{6267cfbd-b97b-4f2f-8429-db6e8a4125e5}</Project>
-      <Name>Mapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

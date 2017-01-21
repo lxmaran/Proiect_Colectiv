@@ -9,5 +9,6 @@ namespace Dal
     public interface IUserRepository: IBaseEntityRepository<User>
     {
         Role GetUserRole(int userId);
+        User getCurrentUser();
     }
 }
