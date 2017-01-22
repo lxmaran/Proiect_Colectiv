@@ -17,8 +17,9 @@ namespace Services.Services
             context = new MyDbContext();
         }
 
-        public void AddTask(Task task)
+        public void AddTask(int documentId, int flowTypeId)
         {
+            var task = new Task { PrincipalDocumentId = documentId, FlowTypeId = flowTypeId };
             context.Tasks.Add(task);
             context.SaveChanges();
         }

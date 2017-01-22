@@ -311,6 +311,7 @@
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentDto.cs" />
     <Compile Include="Models\PersonDto.cs" />
+    <Compile Include="Models\StartTaskDto.cs" />
     <Compile Include="Models\TaskDto.cs" />
     <Compile Include="Models\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

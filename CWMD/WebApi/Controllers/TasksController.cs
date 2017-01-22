@@ -45,5 +45,13 @@ namespace WebApi.Controllers
             TaskService.UpdateAnswear(taskId, answeId);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("add")]
+        public IHttpActionResult Add(StartTaskDto task)
+        {
+            TaskService.AddTask(task.DocumentId, task.FlowTypeId);
+            return Ok();
+        }
     }
 }

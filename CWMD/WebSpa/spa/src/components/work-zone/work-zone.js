@@ -25,7 +25,7 @@ app
 
             DocumentsService.getDocuments().then(response => $ctrl.documents = response);
 
-            $ctrl.startFlow = task => DocumentsService.startFlow(document).then(response => DocumentsService.getDocuments().then(response => $ctrl.documents = response));
+            $ctrl.startFlow = (documentId, flowId) => DocumentsService.startFlow(documentId, flowId).then(response => DocumentsService.getDocuments().then(response => $ctrl.documents = response));
 
         }
     });

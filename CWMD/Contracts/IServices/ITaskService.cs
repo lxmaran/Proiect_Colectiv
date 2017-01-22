@@ -10,7 +10,7 @@ namespace Contracts.IServices
     {
         IEnumerable<Task> GetAll();
 
-        void AddTask(Task task);
+        void AddTask(int documentId, int flowTypeId);
 
         void UpdateAnswear(int taskId, int answearId);
     }
